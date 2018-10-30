@@ -6,19 +6,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {PolicyService} from './services/policy.service';
 import {HttpClientModule} from '@angular/common/http';
-import { AdminComponent } from './components/admin/admin.component';
 import { UiModule } from './ui/ui.module';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { PolicyviewComponent } from './components/policyview/policyview.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
+
+import {routing} from './app.routing';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminComponent
+    LoginComponent,
+    RegisterComponent,
+    PolicyviewComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    UiModule
+    UiModule,
+    routing
   ],
   providers: [PolicyService],
   bootstrap: [AppComponent]
