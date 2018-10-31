@@ -12,8 +12,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { PolicyviewComponent } from './components/policyview/policyview.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HomeComponent } from './home/home.component';
 
-import {routing} from './app.routing';
 
 @NgModule({
   declarations: [
@@ -22,14 +23,16 @@ import {routing} from './app.routing';
     RegisterComponent,
     PolicyviewComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    PageNotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     UiModule,
-    routing
+    AppRoutingModule
   ],
   providers: [PolicyService],
   bootstrap: [AppComponent]
