@@ -22,7 +22,7 @@
         'has-success': password.valid && (password.dirty || password.touched)
    }" required/>
       <div class="form-control-feedback"
-           *ngIf="password.errors && (password.dirty || password.touched)">
+           *ngIf="password.errors ">
         <p *ngIf="password.errors.required">Password is required</p>
         <p *ngIf="password.errors.minlength">Password must be 5 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>
       </div>

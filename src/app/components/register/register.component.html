@@ -1,3 +1,36 @@
-<p>
-  register works!
-</p>
+<div class="container">
+  <form [formGroup]="registerForm" (ngSubmit)="registerUser()" class="needs">
+    <div *ngIf="validMessage != ''">
+      <h3 class="has-info">{{validMessage}}</h3>
+    </div>
+    <div class="form-group" [ngClass]="{
+  'has-danger': firstName.invalid && firstName.dirty,
+  'has-success': firstName.valid && firstName.dirty
+}">
+      <label>First Name</label>
+      <input type="text" class="form-control" formControlName="firstName" required autofocus/>
+      <div class="form-control-feedback"
+           *ngIf="firstName.errors && (firstName.dirty || firstName.touched)">
+        <p *ngIf="firstName.errors.required">User Name is required</p>
+        <p *ngIf="firstName.errors.minlength">First Name must be 5 characters long, we need another {{firstName.errors.minlength.requiredLength - firstName.errors.minlength.actualLength}} characters </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control"  formControlName="password" [ngClass]="{
+        'has-danger': password.invalid && (password.dirty || password.touched),
+        'has-success': password.valid && (password.dirty || password.touched)
+   }" required/>
+      <div class="form-control-feedback"
+           *ngIf="password.errors && (password.dirty || password.touched)">
+        <p *ngIf="password.errors.required">Password is required</p>
+        <p *ngIf="password.errors.minlength">Password must be 5 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary" >Submit</button>
+    <a routerLink="/login" class="btn btn-link">Back</a>
+
+  </form>
+</div>

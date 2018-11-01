@@ -33,10 +33,7 @@ export class LoginComponent implements OnInit {
 
   createFormControls() {
     this.userName = new FormControl('', [Validators.required, Validators.minLength(5)]);
-    this.password = new FormControl('', [
-      Validators.required,
-      Validators.minLength(5)
-    ]);
+    this.password = new FormControl('', [Validators.required, Validators.minLength(5)]);
   }
 
   createForm() {
@@ -56,7 +53,7 @@ export class LoginComponent implements OnInit {
       console.log('login form is invalid')
       return;
     }
-    console.log('User Name ' + this.userName.value);
+    console.log('User Name ' + this.userName.value+ ' password : '+ this.password.value);
   }
 
 }
