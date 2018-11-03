@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
   address: FormControl;
   contactNumber: FormControl;
   validMessage = '';
+  isSamePassword = false;
 
   constructor() { }
 
@@ -48,7 +49,13 @@ export class RegisterComponent implements OnInit {
       contactNumber : this.contactNumber
     });
   }
+
   registerUser() {
+    this.isSamePassword = false;
+
+    if(this.password.value == this.confirmPassword.value) {
+      this.isSamePassword = true;
+    }
     console.log('Going to register user...' + this.firstName);
   }
 
