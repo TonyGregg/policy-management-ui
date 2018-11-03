@@ -1,81 +1,48 @@
-<div class="container">
-  <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
-    <div *ngIf="validMessage != ''">
-      <h3 class="has-info">{{validMessage}}</h3>
-    </div>
-    <div class="form-group" [ngClass]="{
-  'has-danger': firstName.invalid && firstName.dirty,
-  'has-success': firstName.valid && firstName.dirty
-}">
-      <label>First Name</label>
-      <input type="text" class="form-control" formControlName="firstName" required autofocus/>
-      <div class="form-control-feedback"
-           *ngIf="firstName.errors && (firstName.dirty || firstName.touched)">
-        <p *ngIf="firstName.errors.required">User Name is required</p>
-        <p *ngIf="firstName.errors.minlength">First Name must be 5 characters long, we need another {{firstName.errors.minlength.requiredLength - firstName.errors.minlength.actualLength}} characters </p>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Last Name</label>
-      <input type="text" class="form-control"  formControlName="lastName"  required/>
-      <div class="form-control-feedback"
-           *ngIf="lastName.errors">
-        <p *ngIf="lastName.errors.required">Last Name is required</p>
-        <p *ngIf="lastName.errors.minlength">Last Name must be 5 characters long, we need another {{lastName.errors.minlength.requiredLength - lastName.errors.minlength.actualLength}} characters </p>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Date of Birth</label>
-      <input type="calendar" class="form-control"  formControlName="dateOfBirth"  required/>
-      <div class="form-control-feedback"
-           *ngIf="dateOfBirth.errors">
-        <p *ngIf="dateOfBirth.errors.required">Date of Birth is required</p>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Address</label>
-      <input type="text" class="form-control"  formControlName="address"  required/>
-      <div class="form-control-feedback"
-           *ngIf="address.errors">
-        <p *ngIf="address.errors.required">Address is required</p>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Contact No.</label>
-      <input type="text" class="form-control"  formControlName="contactNumber"  required/>
-      <div class="form-control-feedback"
-           *ngIf="contactNumber.errors">
-        <p *ngIf="contactNumber.errors.required">Address is required</p>
-      </div>
-    </div>
-    <div class="form-group">
-    <label>Email Address</label>
-    <input type="text" class="form-control"  formControlName="email"  required/>
-    <div class="form-control-feedback"
-         *ngIf="email.errors">
-      <p *ngIf="email.errors.required">Email is required</p>
-    </div>
-  </div>
-    <div class="form-group">
-    <label>Password</label>
-    <input type="text" class="form-control"  formControlName="password"  required/>
-    <div class="form-control-feedback"
-         *ngIf="password.errors">
-      <p *ngIf="password.errors.required">Password is required</p>
-    </div>
-  </div>
-    <div class="form-group">
-      <label>Confirm Password</label>
-      <input type="text" class="form-control"  formControlName="confirmPassword"  required/>
-      <div class="form-control-feedback"
-           *ngIf="confirmPassword.errors">
-        <p *ngIf="confirmPassword.errors.required">Confirm Password is required</p>
-        <p *ngIf="!isSamePassword">Passwords not matching </p>
+<mat-toolbar>
+  <span>Registration</span>
+</mat-toolbar>
+<mat-card class="my-card">
+  <mat-card-content>
 
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary" >Submit</button>
-    <a routerLink="/login" class="btn btn-link">Back</a>
+    <form class="my-form">
+      <mat-form-field class="full-width">
+        <mat-label>First Name</mat-label>
+        <input  matInput  placeholder="First name"  name="fname"  required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Last Name</mat-label>
+        <input  matInput  placeholder="Last Name" name="lname"  required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Address</mat-label>
+        <input  matInput  placeholder="Address" name="address"  required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Contact No</mat-label>
+        <input  matInput  placeholder="Contact No." name="contactNumber">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input  matInput  type="email" placeholder="Email" name="email">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input  matInput type="password" placeholder="Password"  name="password">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Confirm Password</mat-label>
+        <input  matInput type="password"  placeholder="Confirm Password"  name="confirmPassword">
+      </mat-form-field>
+    </form>
 
-  </form>
-</div>
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- REGISTER BUTTON -->
+  </mat-card-actions>
+</mat-card>
