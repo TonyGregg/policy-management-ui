@@ -4,11 +4,11 @@
     <form class="my-form">
       <mat-form-field class="full-width">
         <mat-label>User ID</mat-label>
-        <input  matInput  placeholder="UserID"  [(ngModel)]="user.userId" name="userId">
+        <input  matInput  placeholder="UserID"  [(ngModel)]="user.userId" name="userId" required>
       </mat-form-field>
       <mat-form-field class="full-width">
         <mat-label>Password</mat-label>
-        <input  matInput TYPE="password" placeholder="Password" [(ngModel)]="user.password" name="password">
+        <input  matInput TYPE="password" placeholder="Password" [(ngModel)]="user.password" name="password" required>
       </mat-form-field>
     </form>
   </mat-card-content>

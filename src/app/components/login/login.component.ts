@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
 
   tryLogin() {
     console.log('Submitted login ' + JSON.stringify(this.user));
+    this.router.navigateByUrl('/policy');
   }
   routeToRegister() {
     this.router.navigateByUrl('/register');
