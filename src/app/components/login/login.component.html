@@ -1,19 +1,25 @@
 
 <mat-card class="my-card">
   <mat-card-content>
-    <form class="my-form">
+    <form #loginForm="ngForm" (ngSubmit)="onFormSubmit()" class="my-form">
       <mat-form-field class="full-width">
-        <mat-label>User ID</mat-label>
-        <input  matInput  placeholder="UserID"  [(ngModel)]="user.userId" name="userId" required>
+      <mat-label>User ID</mat-label>
+      <input  matInput  placeholder="User ID" [(ngModel)]="user.userId"  name="userId" id="userId" required>
+        <mat-error *ngIf="userId.invalid">{{getUserIdError()}}</mat-error>
+
       </mat-form-field>
       <mat-form-field class="full-width">
         <mat-label>Password</mat-label>
         <input  matInput TYPE="password" placeholder="Password" [(ngModel)]="user.password" name="password" required>
+        <mat-error *ngIf="password.invalid">{{getPasswordError()}}</mat-error>
+
       </mat-form-field>
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="tryLogin()" color="primary">Login</button>
+    <!--<button mat-raised-button [disabled]="loginForm.invalid"  type="submit" color="primary">Login</button>-->
+    <button mat-raised-button [disabled]="loginForm.invalid" class="btn" type="submit" (click)="onFormSubmit()">LOGIN</button>
+
     <mat-hint size="small" align="start">New User?</mat-hint>
 
     <button mat-raised-button (click)="routeToRegister()" color="primary">Register</button>
@@ -22,3 +28,5 @@
 
   </mat-card-actions>
 </mat-card>
+
+<!--<button mat-raised-button (click)="routeToRegister()" color="primary">Register</button>-->
