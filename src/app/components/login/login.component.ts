@@ -46,22 +46,26 @@ export class LoginComponent implements OnInit {
     console.log('Submitted login ' + JSON.stringify(this.user));
     this.userService.getUserByUserId(this.user.userId).subscribe(user => {
       this.returnedUser = user;
-      if( this.returnedUser != null) {
+      if (this.returnedUser != null) {
         console.log('Returned user is not null ');
         // console.log('Returned User  !! ' + JSON.stringify(this.returnedUser));
         if (this.returnedUser.password === this.user.password) {
           console.log('Entered password is matching with DB password');
           this.router.navigateByUrl('/policy');
         } else {
-          this.loginMessage = 'Invalid password; please try again';
+          if (this.user.userId === 'Admin') {
+            this.loginMessage = 'Contact Admin service';
+          } else {
+            this.loginMessage = 'Invalid password; please try again';
+
+          }
 
         }
 
       } else {
         console.log('Invalid user id or password ' + this.user.userId)
         this.loginMessage = 'You are not a registered User. Register to login';
-        // Invalid password message
-        // 'Invalid password; please try again'
+
       }
     });
 

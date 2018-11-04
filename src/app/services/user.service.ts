@@ -36,6 +36,14 @@ export class UserService {
     );
   }
 
+  createUser(user: User): Observable<User> {
+    const body = JSON.stringify(user);
+    return this.http.post<User>('/server/api/v1/3cover/users', body, httpOptions ).pipe(
+      tap(_ => this.log('Saved user successfully ')),
+      catchError(this.handleError<User>('createUser = ${user}'))
+    );
+  }
+
 
   /**
    * Handle Http operation that failed.

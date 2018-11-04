@@ -3,8 +3,12 @@
 </mat-toolbar>
 <mat-card class="my-card">
   <mat-card-content>
+    <h6 matLine *ngIf="registerMessage">{{registerMessage}}</h6>
 
-    <form class="my-form">
+    <mat-error *ngIf="confirmPwdMsg">{{confirmPwdMsg}}</mat-error>
+
+
+    <form #registerForm="ngForm" (ngSubmit)="registerUser()" class="my-form">
 
       <mat-form-field class="full-width">
         <mat-label>First Name</mat-label>
@@ -16,7 +20,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Date of Birth</mat-label>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="user.birthDate"  name="birthDate" required>
+        <input matInput [max]="today"  [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="user.birthDate"  name="birthDate" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -45,7 +49,8 @@
 
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="registerUser()" color="primary">REGISTER</button>
+    <button mat-raised-button [disabled]="registerForm.invalid" class="btn" color="primary" type="submit" (click)="registerUser()">REGISTER</button>
+    <!--<button mat-raised-button (click)="registerUser()" color="primary">REGISTER</button>-->
     <button mat-raised-button (click)="doReset()" color="primary">Reset</button>
 
   </mat-card-actions>
