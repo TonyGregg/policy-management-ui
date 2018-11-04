@@ -13,7 +13,9 @@ import {UserService} from '../../services/user.service';
 export class LoginComponent implements OnInit {
   public user = new User();
   public returnedUser: User;
-  public userFromRepo;
+  loginMessage: string;
+
+  // public userFromRepo;
 
   userId = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]);
   password = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]);
@@ -26,6 +28,7 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
+
   }
 
   // convenience getter for easy access to form fields
@@ -43,23 +46,43 @@ export class LoginComponent implements OnInit {
     console.log('Submitted login ' + JSON.stringify(this.user));
     this.userService.getUserByUserId(this.user.userId).subscribe(user => {
       this.returnedUser = user;
-      console.log('Returned User  !! ' + JSON.stringify(this.returnedUser));
+      if( this.returnedUser != null) {
+        console.log('Returned user is not null ');
+        // console.log('Returned User  !! ' + JSON.stringify(this.returnedUser));
+        if (this.returnedUser.password === this.user.password) {
+          console.log('Entered password is matching with DB password');
+          this.router.navigateByUrl('/policy');
+        } else {
+          this.loginMessage = 'Invalid password; please try again';
+
+        }
+
+      } else {
+        console.log('Invalid user id or password ' + this.user.userId)
+        this.loginMessage = 'You are not a registered User. Register to login';
+        // Invalid password message
+        // 'Invalid password; please try again'
+      }
     });
 
     // this.getUserFromRepository(this.user.userId);
     // console.log('Returned User ' + JSON.stringify(this.userFromRepo));
 
 
-    this.router.navigateByUrl('/policy');
   }
 
-  getUserFromRepository(userId: string) {
-    this.userService.getUserFromRepo(userId).subscribe(
-      data => { this.userFromRepo = data; console.log(JSON.stringify(this.userFromRepo))},
-      error1 => console.error(error1),
-      () => console.log('User Loaded from repo !!! yeah !!!')
-    );
-  }
+
+  /**
+   * The below method works, however a better way identified. Take a look at method above
+   // * @param userId
+   */
+  // getUserFromRepository(userId: string) {
+  //   this.userService.getUserFromRepo(userId).subscribe(
+  //     data => { this.userFromRepo = data; console.log(JSON.stringify(this.userFromRepo))},
+  //     error1 => console.error(error1),
+  //     () => console.log('User Loaded from repo !!! yeah !!!')
+  //   );
+  // }
 
   routeToRegister() {
     this.router.navigateByUrl('/register');
