@@ -16,6 +16,7 @@ import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
+import {UserService} from './services/user.service';
 
 
 @NgModule({
@@ -41,7 +42,7 @@ import {MaterialModule} from './material.module';
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [PolicyService],
+  providers: [PolicyService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
