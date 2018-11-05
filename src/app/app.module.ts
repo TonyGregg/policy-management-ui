@@ -12,11 +12,13 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
-import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material.module';
 import {UserService} from './services/user.service';
+import { AgGridModule } from 'ag-grid-angular';
+
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import {UserService} from './services/user.service';
     UiModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    AgGridModule.withComponents(null)
   ],
   providers: [PolicyService, UserService],
   bootstrap: [AppComponent]
