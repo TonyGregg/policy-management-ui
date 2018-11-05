@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import {User} from '../model/user';
+import {UserPolicy} from '../model/user-policy';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -41,6 +42,15 @@ export class UserService {
     return this.http.post<User>('/server/api/v1/3cover/users', body, httpOptions ).pipe(
       tap(_ => this.log('Saved user successfully ')),
       catchError(this.handleError<User>('createUser = ${user}'))
+    );
+  }
+
+  getUserPolicies(id: number): Observable<UserPolicy[]> {
+    const url = '/server/api/v1/3cover/users/userPolicies/' + id;
+    console.log(url);
+    return this.http.get<UserPolicy[]>(url).pipe(
+      tap(_ => this.log('Fetched User by userId = ${userId}')),
+      catchError(this.handleError<UserPolicy[]>('getUserByUserId = ${userId}'))
     );
   }
 

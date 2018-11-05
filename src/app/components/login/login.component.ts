@@ -48,10 +48,14 @@ export class LoginComponent implements OnInit {
       this.returnedUser = user;
       if (this.returnedUser != null) {
         console.log('Returned user is not null ');
-        // console.log('Returned User  !! ' + JSON.stringify(this.returnedUser));
+        console.log('Returned User  !! ' + JSON.stringify(this.returnedUser));
         if (this.returnedUser.password === this.user.password) {
           console.log('Entered password is matching with DB password');
-          this.router.navigateByUrl('/policy');
+          if (this.user.userId === 'Admin') {
+            this.router.navigateByUrl('/policy/admin/999999999');
+          } else {
+            this.router.navigateByUrl('/policy/user/' + this.returnedUser.id);
+          }
         } else {
           if (this.user.userId === 'Admin') {
             this.loginMessage = 'Contact Admin service';

@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'aboutus', component: AboutComponent },
-  { path: 'policy', component: PolicyviewComponent },
+  { path: 'policy/:type/:id', component: PolicyviewComponent },
   { path: 'contactus', component: ContactComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent } // Last option...
