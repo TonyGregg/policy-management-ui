@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import {User} from '../model/user';
-import {Policy} from '../model/policy';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,10 +13,16 @@ const httpOptions = {
 })
 
 /**
- * Service class for User related services
+ * Service class for fetching user related information from rest APIs
  */
 
 export class UserService {
+  /**
+   * log a UserService message with the User Service
+   */
+  private static log(message: string) {
+    console.log(message);
+  }
 
 
   constructor(private http: HttpClient) {
@@ -25,18 +30,15 @@ export class UserService {
   }
 
 
-
-  getUserFromRepo(userId: string) {
-    const url = '/server/api/v1/3cover/users/userid/' + userId;
-    return this.http.get(url);
-
-  }
-
+  /**
+   *
+   * @param userId - userId string, it is firstNameMMDD of user
+   */
   getUserByUserId(userId: string): Observable<User> {
     const url = '/server/api/v1/3cover/users/userid/' + userId;
     console.log(url);
     return this.http.get<User>(url).pipe(
-      tap(_ => this.log('Fetched User by userId = ${userId}')),
+      tap(() => UserService.log('Fetched User by userId = ${userId}')),
       catchError(this.handleError<User>('getUserByUserId = ${userId}'))
     );
   }
@@ -44,20 +46,11 @@ export class UserService {
   createUser(user: User): Observable<User> {
     const body = JSON.stringify(user);
     return this.http.post<User>('/server/api/v1/3cover/users', body, httpOptions ).pipe(
-      tap(_ => this.log('Saved user successfully ')),
+      tap(() => UserService.log('Saved user successfully ')),
       catchError(this.handleError<User>('createUser = ${user}'))
     );
   }
 
-
-
-  savePolicy(policy: Policy): Observable<Policy> {
-    const body = JSON.stringify(policy);
-    return this.http.post<Policy>('/server//api/v1/3cover/policies', body, httpOptions ).pipe(
-      tap(_ => this.log('Saved user successfully ')),
-      catchError(this.handleError<Policy>('createUser = ${user}'))
-    );
-  }
 
 
   /**
@@ -73,18 +66,13 @@ export class UserService {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+      UserService.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
-  /**
-   * log a UserService message with the User Service
-   */
-  private log(message: string) {
-    console.log(message);
-  }
+
 
 
 }

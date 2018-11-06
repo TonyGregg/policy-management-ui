@@ -14,9 +14,6 @@ export class LoginComponent implements OnInit {
   public user = new User();
   public returnedUser: User;
   loginMessage: string;
-
-  // public userFromRepo;
-
   userId = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(30)]);
   password = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]);
 
@@ -27,23 +24,31 @@ export class LoginComponent implements OnInit {
     ) {}
 
 
+  /**
+   * Initialize if anything special to be done on login page before load.
+   * Left it for future use.
+   */
   ngOnInit() {
 
   }
 
-  // convenience getter for easy access to form fields
-  // get f() { return this.loginForm.controls; }
-
+  /**
+   * Get the error message if User ID has issues
+   */
   getUserIdError() {
     return this.userId.hasError('required') ? 'You must enter a value' : '';
   }
+
+  /**
+   * Get the error message if Password field has issues
+   */
   getPasswordError() {
     return this.password.hasError('required') ? 'You must enter a value' :
         '';
   }
 
   /**
-   * Authenticate with the passed user name and password.
+   * Authenticate user with the passed user name and password.
    */
 
   onFormSubmit() {
@@ -51,37 +56,32 @@ export class LoginComponent implements OnInit {
     this.userService.getUserByUserId(this.user.userId).subscribe(user => {
       this.returnedUser = user;
       if (this.returnedUser != null) {
-        console.log('Returned user is not null ');
-        console.log('Returned User  !! ' + JSON.stringify(this.returnedUser));
+        // console.log('Returned user is not null ');
+        // console.log('Returned User  !! ' + JSON.stringify(this.returnedUser));
         if (this.returnedUser.password === this.user.password) {
-          console.log('Entered password is matching with DB password');
+          // console.log('Entered password is matching with DB password');
           if (this.user.userId === 'Admin') {
             this.router.navigateByUrl('/policy/admin/999999999/' + this.user.userId);
           } else {
             this.router.navigateByUrl('/policy/user/' + this.returnedUser.id + '/' + this.user.userId);
           }
-        } else {
-          if (this.user.userId === 'Admin') {
+        } else { // User data is not in DB
+          if (this.user.userId === 'Admin') { // Admin
             this.loginMessage = 'Contact Admin service';
-          } else {
+          } else { // User password not matching with DB password
             this.loginMessage = 'Invalid password; please try again';
 
           }
 
-        }
+        } // end else the user is not in DB
 
       } else {
-        console.log('Invalid user id or password ' + this.user.userId);
+        // console.log('Invalid user id or password ' + this.user.userId);
         this.loginMessage = 'You are not a registered User. Register to login';
 
       }
     });
-
-    // this.getUserFromRepository(this.user.userId);
-    // console.log('Returned User ' + JSON.stringify(this.userFromRepo));
-
-
-  }
+  } // end of login form submit method
 
 
   /**
@@ -103,6 +103,4 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/register');
   }
 
-
-
-}
+} // end of component - LoginComponent
