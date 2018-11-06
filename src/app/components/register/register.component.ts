@@ -35,7 +35,9 @@ export class RegisterComponent implements OnInit {
 
   }
 
-
+  /**
+   * Save the user information to DB via rest API call
+   */
   registerUser() {
     this.registerMessage = null;
     this.confirmPwdMsg = null;
@@ -69,13 +71,17 @@ export class RegisterComponent implements OnInit {
         }
 
       } else {
-        console.log('Registration failed ' + this.user.userId)
+        console.log('Registration failed ' + this.user.userId);
         this.registerMessage = 'Registration failed';
 
       }
     });
 
   }
+
+  /**
+   * Do reset the whole form on click of reset
+   */
   doReset() {
     this.user = new User();
   }

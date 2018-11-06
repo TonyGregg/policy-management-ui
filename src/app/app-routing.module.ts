@@ -7,7 +7,7 @@ import {ContactComponent} from './components/contact/contact.component';
 import {NgModule} from '@angular/core';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HomeComponent} from './home/home.component';
-import {PolicyviewComponent} from './components/policyview/policyview.component';
+import {PolicyViewComponent} from './components/policyview/policyview.component';
 
 
 const appRoutes: Routes = [
@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'aboutus', component: AboutComponent },
-  { path: 'policy/:type/:id', component: PolicyviewComponent },
+  { path: 'policy/:type/:id/:userName', component: PolicyViewComponent },
   { path: 'contactus', component: ContactComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent } // Last option...

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import {User} from '../model/user';
-import {UserPolicy} from '../model/user-policy';
+import {Policy} from '../model/policy';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,6 +12,10 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * Service class for User related services
+ */
 
 export class UserService {
 
@@ -45,12 +49,13 @@ export class UserService {
     );
   }
 
-  getUserPolicies(id: number): Observable<UserPolicy[]> {
-    const url = '/server/api/v1/3cover/users/userPolicies/' + id;
-    console.log(url);
-    return this.http.get<UserPolicy[]>(url).pipe(
-      tap(_ => this.log('Fetched User by userId = ${userId}')),
-      catchError(this.handleError<UserPolicy[]>('getUserByUserId = ${userId}'))
+
+
+  savePolicy(policy: Policy): Observable<Policy> {
+    const body = JSON.stringify(policy);
+    return this.http.post<Policy>('/server//api/v1/3cover/policies', body, httpOptions ).pipe(
+      tap(_ => this.log('Saved user successfully ')),
+      catchError(this.handleError<Policy>('createUser = ${user}'))
     );
   }
 

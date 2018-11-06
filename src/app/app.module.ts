@@ -7,7 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { UiModule } from './ui/ui.module';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { PolicyviewComponent } from './components/policyview/policyview.component';
+import { PolicyViewComponent } from './components/policyview/policyview.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -26,7 +26,7 @@ import { AgGridModule } from 'ag-grid-angular';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    PolicyviewComponent,
+    PolicyViewComponent,
     AboutComponent,
     ContactComponent,
     PageNotFoundComponent,

@@ -42,6 +42,10 @@ export class LoginComponent implements OnInit {
         '';
   }
 
+  /**
+   * Authenticate with the passed user name and password.
+   */
+
   onFormSubmit() {
     console.log('Submitted login ' + JSON.stringify(this.user));
     this.userService.getUserByUserId(this.user.userId).subscribe(user => {
@@ -52,9 +56,9 @@ export class LoginComponent implements OnInit {
         if (this.returnedUser.password === this.user.password) {
           console.log('Entered password is matching with DB password');
           if (this.user.userId === 'Admin') {
-            this.router.navigateByUrl('/policy/admin/999999999');
+            this.router.navigateByUrl('/policy/admin/999999999/' + this.user.userId);
           } else {
-            this.router.navigateByUrl('/policy/user/' + this.returnedUser.id);
+            this.router.navigateByUrl('/policy/user/' + this.returnedUser.id + '/' + this.user.userId);
           }
         } else {
           if (this.user.userId === 'Admin') {
@@ -67,7 +71,7 @@ export class LoginComponent implements OnInit {
         }
 
       } else {
-        console.log('Invalid user id or password ' + this.user.userId)
+        console.log('Invalid user id or password ' + this.user.userId);
         this.loginMessage = 'You are not a registered User. Register to login';
 
       }
@@ -92,6 +96,9 @@ export class LoginComponent implements OnInit {
   //   );
   // }
 
+  /**
+   * Route to register on click of Register button is clicked
+   */
   routeToRegister() {
     this.router.navigateByUrl('/register');
   }

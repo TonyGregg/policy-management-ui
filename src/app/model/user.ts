@@ -1,5 +1,6 @@
-import {Adapter} from '../core/adapter';
-import {Injectable} from '@angular/core';
+/**
+ * User Class
+ */
 
 export class User {
   public id: number;
@@ -15,25 +16,3 @@ export class User {
 
 }
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class UserAdapter implements Adapter<User> {
-//
-//   adapt(item: any): User {
-//     user: User;
-//     user.id = item.id;
-//
-//       item.id,
-//       item.userId,
-//       item.firstName,
-//       item.lastName,
-//       new Date(item.birthDate),
-//       item.address,
-//       item.contactNumber,
-//       item.email,
-//       item.password,
-//       item.confirmPassword,
-//     ;
-//   }
-// }
