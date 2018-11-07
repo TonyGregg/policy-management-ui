@@ -23,15 +23,10 @@ export class PolicyViewComponent implements OnInit {
 
   columnDefs: any[]; // Column definitions for all policies
   rowData: any[]; // Row data holder for policies
+
+  userPolicyColDefs: any[]; // Column definitions for user policies
   userPolicyRowData: any[]; // User Policies row holder
   returnedPolicy: Policy;
-  userPolicyColDefs = [
-    {headerName: 'Policy No', field: 'policyId'},
-    {headerName: 'Policy Name', field: 'policy.policyName'},
-    {headerName: 'Amount Paid', field: 'amountPaid'},
-    {headerName: 'Policy End Date', field: 'policyEndDate'},
-    {headerName: 'Valid', field: 'valid'}
-  ]; // Column definitions for user policies
 
   /**
    * Constructor for PolicyView. Load the needed classes to fetch policies.
@@ -59,11 +54,20 @@ export class PolicyViewComponent implements OnInit {
     }
     this.columnDefs = [
       {headerName: 'SI.NO', field: 'id'},
-      {headerName: 'Policy Name', field: 'policyName', editable: (!this.isUser)},
-      {headerName: 'Policy Details', field: 'detailedName', editable: (!this.isUser)}
+      {headerName: 'Policy Name', field: 'policyName', editable: (this.isAdmin)},
+      {headerName: 'Policy Details', field: 'detailedName', editable: (this.isAdmin)}
     ];
     this.idParam = this.route.snapshot.params.id;
     console.log('User type passed ' + this.userType + ' ID : ' + this.idParam);
+    this.userPolicyColDefs = [
+      {headerName: 'Policy No', field: 'policyId'},
+      {headerName: 'Policy Name', field: 'policy.policyName'},
+      {headerName: 'Amount Paid', field: 'amountPaid', valueFormatter: this.currencyFormatter, cellClass: 'number-cell'},
+      {headerName: 'Policy End Date', field: 'policyEndDate'},
+      {headerName: 'Valid', field: 'valid'}
+    ]; // Column definitions for user policies
+
+
     this.loadAllPolicies();
     this.loadUserPolicies(this.idParam);
   }
@@ -114,5 +118,13 @@ export class PolicyViewComponent implements OnInit {
 
     });
   } // end of method onCellValueChanged
+
+   currencyFormatter(params) {
+    console.log('inside currency formatter');
+    return '$' + (params.value);
+  }
+
+
+
 
 } // end of component

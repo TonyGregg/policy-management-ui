@@ -3,7 +3,7 @@
   <div class="col-sm-4">
     Welcome {{userName}}
   </div>
-  <div class="col-sm-4" align="center">
+  <div class="col-sm-4" align="left">
     Available Policies
   </div>
 
@@ -14,9 +14,10 @@
 </div>
 <div>
   <ag-grid-angular
-    style="width: 100%; height: 500px;"
+    style="width: 100%; height: 250px;"
     class="ag-theme-balham"
     [rowData]="rowData"
+    [enableSorting]="true"
     (cellValueChanged)="onCellValueChanged($event)"
     [columnDefs]="columnDefs">
   </ag-grid-angular>
@@ -26,8 +27,9 @@
 <div *ngIf="isUser">
   <h6> {{userName}} Policy Details</h6>
   <ag-grid-angular
-    style="width: 100%; height: 500px;"
+    style="width: 100%; height: 340px;"
     class="ag-theme-balham"
+    [enableSorting]="true"
     [rowData]="userPolicyRowData"
     [columnDefs]="userPolicyColDefs">
   </ag-grid-angular>
