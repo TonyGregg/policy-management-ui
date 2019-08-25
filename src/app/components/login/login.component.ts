@@ -10,6 +10,10 @@ import {UserService} from '../../services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+/*
+* Component class for Login page
+*/
 export class LoginComponent implements OnInit {
   public user = new User();
   public returnedUser: User;
