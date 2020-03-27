@@ -21,7 +21,7 @@ export class PolicyService {
 
   savePolicy(policy: Policy): Observable<Policy> {
     const body = JSON.stringify(policy);
-    return this.http.post<Policy>('/server//api/v1/3cover/policies', body, httpOptions ).pipe(
+    return this.http.post<Policy>('/server/api/v1/3cover/policies', body, httpOptions ).pipe(
       tap(_ => this.log('Saved policy successfully ')),
       catchError(this.handleError<Policy>('createUser = ${user}'))
     );
